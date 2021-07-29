@@ -6,6 +6,6 @@
 
 ## TIL
 
-* [multi-input functions](multi_input_function) can be created by stringing inputs together via `list()`
+* [multi-input functions](multi_input_function) can be created by stringing inputs together via `tagList()`
 * `dput()` function to create code to write your data (e.g. `dput(head(iris))`)
 * click left of a code line in RStudio to create a break point in evaluation and interactively look at what is what at the breakpoint
