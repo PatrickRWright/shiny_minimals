@@ -1,3 +1,5 @@
+# Minimal working shiny examples
+
 # Shiny notes
 
 * write the analysis in R first and then develop the shiny app
