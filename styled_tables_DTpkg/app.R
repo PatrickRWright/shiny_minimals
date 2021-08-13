@@ -40,7 +40,7 @@ server <- function(input, output, session) {
     datatable(iris_icons, escape = FALSE) %>%
       # numeric values as histogram in table
       formatStyle(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"),
-                  background = styleColorBar(c(0, 10), color = "#beccbf"),
+                  background = styleColorBar(c(0, 10), color = "#d3e3d4"),
                   backgroundSize = '98% 78%',
                   backgroundRepeat = 'no-repeat',
                   backgroundPosition = 'center')
