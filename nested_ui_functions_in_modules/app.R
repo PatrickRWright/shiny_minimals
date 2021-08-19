@@ -2,7 +2,7 @@ library(shiny)
 library(purrr) # for map()
 
 # get functions
-map(list.files("ui_element_creating_functions_in_modules/R", full.names = TRUE),
+map(list.files("nested_ui_functions_in_modules/R", full.names = TRUE),
     ~source(.x, encoding = "UTF-8"))
 
 # Define UI for application that draws a histogram
