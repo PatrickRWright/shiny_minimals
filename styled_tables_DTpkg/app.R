@@ -22,6 +22,7 @@ ui <- basicPage(
               .fa-bahai {color:#32c260}
               .fa-sun {color:#ccd12c}"),
   # this is a hidden indicator that font-awesome is needed
+  # in shinydashboard this line is not needed
   tags$span(icon("tag"), style = "display: none;")
 )
 
@@ -37,9 +38,14 @@ server <- function(input, output, session) {
   
   output$table <- DT::renderDataTable({
                           # escape needed to render the icons
-    datatable(iris_icons, escape = FALSE) %>%
+    datatable(iris_icons, escape = FALSE,
+              # set column header names
+              colnames = c("Sepal Length", "Sepal Width",
+                           "Petal Length", "Petal Width",
+                           "Species", "Icon")) %>%
       # numeric values as histogram in table
       formatStyle(c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"),
+                                            # min max scaling
                   background = styleColorBar(c(0, 10), color = "#d3e3d4"),
                   backgroundSize = '98% 78%',
                   backgroundRepeat = 'no-repeat',
