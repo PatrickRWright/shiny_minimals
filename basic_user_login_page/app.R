@@ -24,6 +24,7 @@ ui <- dashboardPage(
 )
 
 # Wrap your UI with secure_app - head_auth enables the timeout on the login page
+# the source for the inactivity variable is located in the R directory
 ui <- shinymanager::secure_app(head_auth = tags$script(inactivity), ui)
 
 server <- function(input, output, session) {
@@ -31,6 +32,7 @@ server <- function(input, output, session) {
   # call the server part
   # check_credentials returns a function to authenticate users
   res_auth <- shinymanager::secure_server(
+    # the source for the credentials variable is located in the R directory
     check_credentials = shinymanager::check_credentials(credentials)
   )
   
