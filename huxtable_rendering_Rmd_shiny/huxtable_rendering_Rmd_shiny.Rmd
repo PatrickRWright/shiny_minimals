@@ -1,0 +1,64 @@
+---
+title: "shiny_in_Rmd"
+runtime: shiny
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Ref. articles:
+# https://shiny.rstudio.com/articles/interactive-docs.html
+# https://stackoverflow.com/questions/57584823/how-to-maintain-decimal-point-rounding-of-export-summs-in-a-r-shiny-app
+
+library(tidyverse)
+library(huxtable)
+library(shiny)
+```
+
+## Regular table
+```{r tabtableregular, echo = FALSE}
+selectInput("speciesreg",
+            "Select:",
+            choices = c("mix", as.character(unique(iris$Species))))
+
+renderTable(
+  if (input$speciesreg != "mix") {
+    iris %>% filter(Species == input$speciesreg) %>% head()
+  } else if(input$speciesreg == "mix") {
+    iris[c(1, 2, 51, 52, 101, 102), ]
+  }
+)
+```
+
+## huxtable table
+```{r tabtablehux, echo = FALSE}
+selectInput("specieshux",
+            "Select:",
+            choices = c("mix", as.character(unique(iris$Species))))
+
+renderUI({
+  if (input$specieshux != "mix") {
+    iris %>% filter(Species == input$specieshux) %>% head() %>% hux() %>%
+    set_all_padding(4) %>% 
+      set_number_format(2) %>% 
+      set_bold(row = 1, col = everywhere) %>% 
+      set_bottom_border(row = 1, col = everywhere) %>%
+      set_background_color(evens, everywhere, "grey95") %>%
+      set_background_color(row = 1, value = "#aac1d9") %>%
+      set_position("left") %>%
+      to_html() %>% HTML()
+  } else if(input$specieshux == "mix") {
+    iris[c(1, 2, 51, 52, 101, 102), ] %>% hux() %>%
+      set_all_padding(4) %>% 
+      set_number_format(2) %>% 
+      set_bold(row = 1, col = everywhere) %>% 
+      set_bottom_border(row = 1, col = everywhere) %>%
+      set_background_color(evens, everywhere, "grey95") %>%
+      set_background_color(row = 1, value = "#aac1d9") %>%
+      set_position("left") %>%
+      to_html() %>% HTML()
+  }
+})
+
+```
